@@ -1,0 +1,124 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[german]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+
+\setlength\parindent{0pt}
+
+\begin{titlepage}
+
+\begin{document}
+
+\begin{center}
+\large
+Software Engineering\\
+Studiengang Angewandte Informatik - Technische Hochschule Deggendorf\\
+Wintersemester 16/17
+
+\begin{center}
+\Large
+\vspace*{3\baselineskip}
+\textbf{Dokumentation - Projekt Bordcomputer}
+\vspace*{3\baselineskip}
+\noindent\rule{16cm}{0.4pt}
+\end{center}
+
+\textbf{Globosoft AG}\\
+
+Alexander Kainz, Florian Graßl, Matthias Baumgartner, Nicolas Tiefnig\\
+
+\today
+
+\end{center}
+
+\end{titlepage}
+
+\tableofcontents
+
+\section{Zusammenfassung}
+
+Bei dem Projekt Bordcomputer soll ein lauffähiges Programm entstehen, das als Bordcomputer im Automotive Bereich eingesetzt werden kann. Zusätzlich wird ein Simulator implementiert der ein Motorsteuergerät simulieren soll, das Werte an den Bordcomputer liefert und auch als Schnittstelle des Benutzers zu dem System dient. Insgesamt besteht die Software also aus dem Simulator und der eigentlichen Bordcomputer Software. Es wird zuerst eine Analyse der Requirements des Auftraggebers durchgeführt, um alle Anforderungen erfüllen zu können. Danach erfolgt Entwurf, Konzeption und Codierung mit einer abschließenden Testphase. Alle Arbeitsschritte werden in diesem Dokument zusammengefasst und bei Bedarf näher erläutert.
+
+\section{Anforderungsanalyse}
+
+Seitens des Auftraggebers liegen folgende Anforderungen an die Software in Form eines Lastenhefts vor (Original):\\
+
+\noindent\rule{16cm}{0.4pt}
+Lastenheft\\
+
+Allgemeines:
+Der Bordcomputer soll dem Fahrer Informationen über den aktuellen Fahrzeugzustand mitteilen. Im Einzelnen sind dies folgende Daten:
+
+\begin{itemize}
+
+\item Aktuelle Geschwindigkeit 
+\item Temperatur Motoröl
+\item Temperatur Kühlwasser
+\item Außentemperatur 
+\item Kraftstoffverbrauch momentan 
+\item Kraftstoffverbrauch seit Fahrantritt
+\item Seit Fahrtantritt zurückgelegte Strecke in km
+\item Seit Fahrtantritt vergangene Zeit
+\item Seit Fahrtantritt erreichte Durchschnittsgeschwindigkeit 
+\item Warnung bei Erreichen einer eingestellten Maximalgeschwindigkeit
+
+\end{itemize}
+ 
+Die Software soll in einer PC Umgebung entwickelt und simuliert werden.
+
+Anforderungen im Detail:
+
+\begin{itemize}
+
+\item Der Bordcomputer ist im Fahrbetrieb immer aktiv 
+\item Über einen Schalter im Blinkhebel kann zwischen den Daten hin und her gewechselt werden 
+user input / entscheidet über angezeigte Daten
+\item Über einen zweiten Taster im Blinkhebel können die Daten, die seit Fahrtantritt gesammelt wurden, zurückgesetzt werden.
+\item Mittels beider Taster soll eine Maximalgeschwindigkeit einstellbar sein, bei deren Erreichen eine Warnung ausgegeben wird. Die Warnung bleibt so lange erhalten, bis die eingestellte Maximalgeschwindigkeit wieder eingehalten wird.
+\item Die angezeigten Daten werden aus den vom Fahrzeug über einen Kommunikations­bus gelieferten Daten (aktuelle Geschwindigkeit, aktueller Verbrauch, Öl- und Wassertemperatur, Außentemperatur) berechnet. 
+\item Die Anzeige des Bordcomputers darf grafisch oder alphanumerisch implementiert werden.
+\item Zum Test des Bordcomputers ist zusätzlich eine Simulationssoftware zu erstellen, die dem Bordcomputer die vom Fahrzeug gelieferten und benötigten Daten (aktueller Verbrauch, aktuelle Geschwindigkeit, Temperaturen von Motoröl und Kühlwasser, Zündung an/aus usw.) und die Tasterstellung permanent zur Verfügung stellt.
+
+\end{itemize}
+\noindent\rule{16cm}{0.4pt}
+
+Dabei werden seitens des Projektteams folgende Ergänzungen vorgenommen:\\
+
+Daten
+
+\begin{itemize}
+
+\item Aktuelle Geschwindigkeit
+
+		\textbf{Ergänzung:} \emph{Aktuelle Geschwindigkeit wird jede Sekunde vom Simulator geliefert}
+
+\item \textbf{Temperatur} Motoröl 
+\item \textbf{Temperatur} Kühlwasser
+\item Außen\textbf{temperatur}
+
+		\textbf{Ergänzung:} \emph{Alle Temperaturen werden von Simulator vorgegeben}
+
+\item Kraftstoffverbrauch momentan
+
+		\textbf{Ergänzung:} \emph{Kraftstoffverbrauch wird von Simulator vorgegeben (Drosselklappenstellung) und jede Sekunde vom Simulator geliefert}
+
+\item Kraftstoffverbrauch \textbf{Seit Fahrtantritt}
+\item \textbf{Seit Fahrtantritt} zurückgelegte Strecke in km
+\item \textbf{Seit Fahrtantritt} vergangene Zeit
+\item \textbf{Seit Fahrtantritt} erreichte Durchschnittsgeschwindigkeit
+
+		\textbf{Ergänzung:} \emph{Anforderung: Zeit seit Fahrantritt muss zuverlässig gezählt werden}
+
+\item \textbf{Warnung} bei Erreichen einer eingestellten Maximalgeschwindigkeit
+
+		\textbf{Ergänzung:} \emph{Warnung definiert als Ausrufezeichen in der alphanumerischen Anzeige}
+
+\end{itemize}
+
+
+
+
+
+
+\end{document}
