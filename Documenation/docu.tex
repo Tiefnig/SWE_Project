@@ -43,6 +43,8 @@ Bei dem Projekt Bordcomputer soll ein lauffähiges Programm entstehen, das als B
 
 \section{Anforderungsanalyse}
 
+\subsection{Lastenheft}
+
 Seitens des Auftraggebers liegen folgende Anforderungen an die Software in Form eines Lastenhefts vor (Original):\\
 
 \noindent\rule{16cm}{0.4pt}
@@ -84,7 +86,9 @@ user input / entscheidet über angezeigte Daten
 \end{itemize}
 \noindent\rule{16cm}{0.4pt}
 
-Dabei werden seitens des Projektteams folgende Ergänzungen vorgenommen:\\
+\subsection{Überarbeitung Lastenheft}
+
+An dem Lastenheft werden seitens des Projektteams folgende Ergänzungen vorgenommen:\\
 
 Lastenheft (von Projektteam überarbeitet)
 
@@ -130,9 +134,11 @@ user input / entscheidet über angezeigte Daten
 
 \textbf{Anmerkung:} \emph{Hier wird von einem Schalter gesprochen, gemeint wird aber ein Taster}
 
-\item Über einen zweiten Taster im Blinkhebel können die Daten, die seit Fahrtantritt gesammelt wurden, zurückgesetzt werden.
+\item Über einen zweiten Taster im Blinkhebel können die Daten, die seit Fahrtantritt gesammelt wurden, zurückgesetzt werden. 
 
-\textbf{Annahme:} \emph{Die beiden Taster und deren Stellung wird vom Simulator vorgegeben}
+\textbf{Annahme:} \emph{Die beiden Taster und deren Stellung wird vom Simulator vorgegeben.}
+
+\textbf{Annahme:} \emph{Es werden alle Daten gemeint (Verbrauch, Strecke, Durchschnittsgeschwindigkeit usw.), ab dem Zeitpunkt des Reset erfolgt eine neue Messung der Daten.}
 
 \item Mittels beider Taster soll eine Maximalgeschwindigkeit einstellbar sein, bei deren Erreichen eine Warnung ausgegeben wird. Die Warnung bleibt so lange erhalten, bis die eingestellte Maximalgeschwindigkeit wieder eingehalten wird.
 
@@ -160,7 +166,7 @@ user input / entscheidet über angezeigte Daten
 
 Um eine einfache, übersichtliche Darstellung des Lastenhefts zu erzielen, wird ein Diagram angefertigt, dass alle Anforderungen grafisch darstellt.
 
-\begin{figure}[!ht]
+\begin{figure}[ht]
 
 \begin{center}
 \includegraphics[scale=0.55]{Requirements_v2.jpg}
@@ -169,8 +175,98 @@ Um eine einfache, übersichtliche Darstellung des Lastenhefts zu erzielen, wird 
 
 \end{figure}
 
-Nun liegen die Anforderungen an die Software detailliert und nachvollziehbar vor, das Diagram dient als Rahmen für die nächsten Schritte der Entwicklung. Damit ist die Phase der Anforderungsanalyse abgeschlossen.
+Nun liegen die Anforderungen an die Software detailliert und nachvollziehbar vor, das Diagram dient als Rahmen für die nächsten Schritte der Entwicklung.
 
+\subsection{Unterteilung des Systems in Funktionsgruppen}
+
+Das Gesamtsystem wird der Übersicht halber in einzelne Funktionseinheiten unterteilt, die Unterteilung liegt ebenfalls in Form eines Diagrams vor (Abbildung 2, Seite 6).
+
+\begin{figure}[!ht]
+
+\begin{center}
+\includegraphics[scale=0.55]{Funktionsblock.jpg}
+\caption{Einteilung in Funktionsgruppen}
+\end{center}
+
+\end{figure}
+
+\subsubsection{Bordcomputer}
+
+Die Anzeigewerte des Bordcomputers werden in folgender Reihenfolge dargestellt:
+\begin{enumerate}
+	\item Momentangeschwindigkeit
+	\item Durchschnittsgeschwindigkeit
+	\item Momentanverbrauch
+	\item Durchschnittsverbrauch
+	\item Gefahrene Strecke seit Fahrtantritt
+	\item Vergangene Zeit seit Fahrtantritt
+	\item Maximalgeschwindigkeit
+\end{enumerate}
+
+Nähere Definition der Anzeigewerte:
+\begin{enumerate}
+	\item Momentangeschwindigkeit 
+			wird in km/h angezeigt
+	\item Durchschnittsgeschwindigkeit
+			wird in km/h angezeigt
+	\item Momentanverbrauch
+			wird in l/100km angezeigt wenn das Fahrzeug in Bewegung ist,
+			Steht das Fahrzeug still wird ein Bindestrich angezeigt
+	\item Durchschnittsverbrauch
+			wird in l/100km angezeigt
+	\item Gefahrene Strecke seit Fahrtantritt
+			wird in km angezeigt
+	\item Vergangene Zeit seit Fahrtantritt
+			wird in Stunden und Minuten angezeigt
+	\item Maximalgeschwindigkeit
+			wird in km/h angezeigt
+\end{enumerate}
+
+Allgemeine Festlegungen:
+
+\begin{itemize}
+
+	\item alle Verbrauchswerte werden mit zwei Nachkommastellen angezeigt
+	\item alle Geschwindigkeiten ohne Nachkommastellen
+	\item alle Strecken mit einer Nachkommastelle
+
+\end{itemize}
+
+\subsubsection{Simulator}
+
+Eigenschaften und Festlegungen der Tastereingaben:\\
+
+Taster 1
+\begin{itemize}
+
+	\item wechselt zwischen den Daten die von der Anzeige dargestellt werden
+	\item Bei der Auswahl der Maximalgeschwindigkeit ist dieser Taster derjenige, der den einzustellenden Wert erhöht
+
+\end{itemize}
+
+Taster 2
+\begin{itemize}
+
+	\item Rücksetzen aller Werte seit Fahrtantritt (Durchschnittsverbrauch, Durchschnittsgeschwindigkeit und Strecke) auf null
+	\item Bei der Auswahl der Maximalgeschwindigkeit ist dieser Taster derjenige, der den einzustellenden Wert erniedrigt
+	
+\end{itemize}
+
+Taster 1 und Taster 2 in Kombination
+\begin{itemize}
+
+	\item Aufruf Menü zur Einstellung der Maximalgeschwindigkeit.
+	\item Taster 1 Maximalgeschw. +10 km/h, Taster 2 Maximalgeschw. -10 km/h.
+	\item Nochmaliges Drücken beider Taster speichert der Maximalgeschw. Rückkehr zum vorherigen Menüpunkt.
+	\item negative Werte sind nicht einstellbar, eine Null wird als Bindestrich dargestellt und bedeutet dass keine Maxmimalgeschwindigkeit eingestellt ist
+	\item Null ist der Ausgangswert nach Einschalten der Zündung
+	\item Werden beide Taster erneut betätigt um das Menü zur Einstellung der Maximalgeschwindigkeit aufzurufen wird der zuletzt eingestellte Wert angezeigt
+	
+\end{itemize}
+
+Die Werte der Taster werden intern als Wahrheitswerte dargestellt und übergeben (true/false).
+
+\subsection{Spezifikationen der Funktionsgruppen}
 
 
 
