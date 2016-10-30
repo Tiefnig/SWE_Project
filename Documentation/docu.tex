@@ -4,6 +4,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
+%\usepackage{hyperref}
 
 \setlength\parindent{0pt}
 
@@ -264,9 +265,62 @@ Taster 1 und Taster 2 in Kombination
 	
 \end{itemize}
 
-Die Werte der Taster werden intern als Wahrheitswerte dargestellt und übergeben (true/false).
+Die Werte der Taster werden intern als Wahrheitswerte dargestellt und übergeben (true/false).\\
 
-\subsection{Spezifikationen der Funktionsgruppen}
+Eigenschaften und Festlegungen der Temperaturen:
+
+Annahme: Alle Werte liegen im Normbereich.
+
+\begin{itemize}
+
+\item Die Außentemperatur ist eine ist ein konstanter Wert
+\item Die Temperatur des Motoröls wird durch eine Funktion vorgegeben. Das heißt der Wert ändert sich zeitabhängig bis ein Endwert erreicht wird
+\item Die Temperatur des Kühlwassers wird durch eine Funktion vorgegeben. Das heißt der Wert ändert sich zeitabhängig bis ein Endwert erreicht wird
+
+\end{itemize}
+
+Eigenschaften und Festlegungen von Momentangeschwindigkeit:
+
+\begin{itemize}
+
+\item Die Momentangeschwindigkeit wird vom Simulator als positive Ganzzahl in Meter pro Sekunde übermittelt
+\item Bei einer Rückwärtsfahrt wird der Wert der Momentangeschwindigkeit trotzdem als positive Ganzzahl geliefert.
+
+\end{itemize}
+
+Eigenschaften und Festlegungen von Momentanverbrauch:
+
+\begin{itemize}
+
+\item Der Momentanverbrauch wird in Liter pro Sekunde geliefert. 
+\item Der Momentanverbrauch richtet sich nach der Momentangeschwindigkeit über eine Funktion.
+
+\end{itemize}
+
+\subsubsection{Fahrtzyklen}
+
+Definition Fahrtzyklen:\\
+
+Simulierte Strecken die in Form von fest vorgegeben Werten im Simulator gespeichert/definiert sind.
+Dabei gibt sollen mehrere Zyklen zur Auswahl stehen.
+
+\subsubsection{Anzeige}
+
+Die Anzeige des Bordcomputers wird ohne grafische Oberfläche implementiert. Zur Darstellung aller Werte und Menüpunkte wird eine alphanumerische Anzeige verwendet. Die Anzeige ist wie folgt aufgebaut:
+
+\begin{enumerate}
+	\item Zeile: Name der angezeigten Information
+	\item Zeile: Wert der angezeigten Information
+	\item Zeile: Einheit der angezeigten Information
+\end{enumerate}
+
+\section{Objektorientierte Analyse}
+
+
+
+
+
+
 
 
 
